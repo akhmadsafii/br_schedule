@@ -23,9 +23,95 @@ License: For each use you must have a valid license purchased only from above li
     <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        .app-shell {
+            background: #f6f8fb;
+        }
+
+        .page-shell {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .card-soft {
+            border: 1px solid #eef1f6;
+            box-shadow: 0 8px 20px rgba(31, 50, 70, 0.08);
+        }
+
+        .card-hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f2f6ff 100%);
+        }
+
+        .stat-tile {
+            border: 1px solid #eef1f6;
+            border-radius: 16px;
+            padding: 18px 20px;
+            background: #ffffff;
+            height: 100%;
+        }
+
+        .table-slim th,
+        .table-slim td {
+            padding: 0.55rem 0.6rem;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .schedule-grid {
+            overflow-x: auto;
+        }
+
+        .sticky-col {
+            position: sticky;
+            left: 0;
+            z-index: 2;
+            background: #ffffff;
+            border-right: 1px solid #e9edf5;
+        }
+
+        .sticky-col.header {
+            z-index: 3;
+            background: #f9fbff;
+        }
+
+        .token-text {
+            font-family: "Courier New", monospace;
+            font-size: 12px;
+            color: #4b5563;
+        }
+
+        .form-compact .form-control,
+        .form-compact .form-select {
+            border-radius: 10px;
+        }
+
+        .mobile-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 991px) {
+            .page-shell {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .app-toolbar {
+                padding-top: 12px;
+                padding-bottom: 12px;
+            }
+
+            .table-slim th,
+            .table-slim td {
+                padding: 0.45rem 0.5rem;
+                font-size: 12px;
+            }
+        }
+    </style>
     @stack('styles')
 </head>
-<body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-sidebar-stacked="true" data-kt-app-toolbar-enabled="true" class="app-default">
+<body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-sidebar-stacked="true" data-kt-app-toolbar-enabled="true" class="app-default app-shell">
     <script>
         var defaultThemeMode = "light";
         var themeMode;
@@ -124,7 +210,7 @@ License: For each use you must have a valid license purchased only from above li
                         @endif
 
                         <div id="kt_app_content" class="app-content flex-column-fluid">
-                            <div id="kt_app_content_container" class="app-container container-fluid">
+                            <div id="kt_app_content_container" class="app-container container-fluid page-shell">
                                 @yield('content')
                             </div>
                         </div>

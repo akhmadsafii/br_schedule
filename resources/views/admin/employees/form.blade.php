@@ -7,7 +7,7 @@
 @section('page-subtitle', 'Kelola data karyawan')
 
 @section('content')
-    <div class="card">
+    <div class="card card-soft">
         <div class="card-header">
             <div class="card-title">
                 <h3 class="fw-bold mb-0">{{ $employee->exists ? 'Edit' : 'Tambah' }} Karyawan</h3>
@@ -18,7 +18,7 @@
                 <div class="alert alert-danger">{{ $errors->first() }}</div>
             @endif
 
-            <form method="POST" action="{{ $employee->exists ? route('admin.employees.update', $employee) : route('admin.employees.store') }}" class="d-flex flex-column gap-5">
+            <form method="POST" action="{{ $employee->exists ? route('admin.employees.update', $employee) : route('admin.employees.store') }}" class="d-flex flex-column gap-5 form-compact">
                 @csrf
                 @if ($employee->exists)
                     @method('PUT')

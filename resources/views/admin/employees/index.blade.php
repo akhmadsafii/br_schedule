@@ -7,7 +7,7 @@
 @section('page-subtitle', 'CRUD data karyawan')
 
 @section('content')
-    <div class="card">
+    <div class="card card-soft">
         <div class="card-header align-items-center">
             <div class="card-title">
                 <h3 class="fw-bold mb-0">Data Karyawan</h3>
@@ -25,7 +25,7 @@
             @endif
 
             <div class="table-responsive">
-                <table class="table table-row-dashed table-row-gray-300 align-middle">
+                <table class="table table-row-dashed table-row-gray-300 align-middle table-slim">
                     <thead>
                         <tr class="text-muted">
                             <th>Nama</th>
@@ -47,7 +47,7 @@
                                         {{ $employee->is_active ? 'Aktif' : 'Nonaktif' }}
                                     </span>
                                 </td>
-                                <td class="text-muted">{{ $employee->token }}</td>
+                                <td class="token-text">{{ $employee->token }}</td>
                                 <td class="text-end">
                                     <a href="{{ route('admin.employees.edit', $employee) }}" class="btn btn-sm btn-light-primary">Edit</a>
                                     <form method="POST" action="{{ route('admin.employees.destroy', $employee) }}" class="d-inline">

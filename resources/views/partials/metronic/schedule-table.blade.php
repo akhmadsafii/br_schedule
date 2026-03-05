@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card card-soft">
     <div class="card-header align-items-center">
         <div class="card-title">
             <h3 class="fw-bold mb-0">Jadwal Bulan {{ $monthLabel }}</h3>
@@ -10,11 +10,11 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-row-dashed table-row-gray-300 align-middle fs-7">
+        <div class="schedule-grid">
+            <table class="table table-row-dashed table-row-gray-300 align-middle fs-7 table-slim">
                 <thead>
                     <tr class="text-muted">
-                        <th class="min-w-150px">Nama</th>
+                        <th class="min-w-150px sticky-col header">Nama</th>
                         @forelse ($days as $day)
                             <th class="text-center">{{ $day }}</th>
                         @empty
@@ -25,7 +25,7 @@
                 <tbody>
                     @forelse ($employees as $employee)
                         <tr>
-                            <td class="fw-semibold text-gray-800">{{ $employee->name }}</td>
+                            <td class="fw-semibold text-gray-800 sticky-col">{{ $employee->name }}</td>
                             @forelse ($days as $day)
                                 @php
                                     $date = $month
@@ -36,7 +36,7 @@
                                         : null;
                                 @endphp
                                 <td class="text-center">
-                                    <select class="form-select form-select-sm" {{ $editable ? '' : 'disabled' }}>
+                                    <select class="form-select form-select-sm form-select-solid" {{ $editable ? '' : 'disabled' }}>
                                         <option value="">-</option>
                                         @foreach ($shifts as $shiftOption)
                                             <option value="{{ $shiftOption->id }}" @selected($shift && $shift->id === $shiftOption->id)>
@@ -51,7 +51,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="fw-semibold text-gray-800">Belum ada karyawan</td>
+                            <td class="fw-semibold text-gray-800 sticky-col">Belum ada karyawan</td>
                             @forelse ($days as $day)
                                 <td class="text-center">-</td>
                             @empty

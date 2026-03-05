@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: MetronicProduct Version: 8.3.3
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+<head>
+    <base href="./" />
+    <title>@yield('title', 'Sistem Penjadwalan')</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Scheduling system" />
+    <meta name="keywords" content="schedule, shift, admin, public" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    @stack('styles')
+</head>
+<body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-sidebar-stacked="true" data-kt-app-toolbar-enabled="true" class="app-default">
+    <script>
+        var defaultThemeMode = "light";
+        var themeMode;
+        if (document.documentElement) {
+            if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+                themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+            } else {
+                if (localStorage.getItem("data-bs-theme") !== null) {
+                    themeMode = localStorage.getItem("data-bs-theme");
+                } else {
+                    themeMode = defaultThemeMode;
+                }
+            }
+            if (themeMode === "system") {
+                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-bs-theme", themeMode);
+        }
+    </script>
+
+    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+        <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+            @if (empty($hideHeader))
+                <div id="kt_app_header" class="app-header" data-kt-sticky="true" data-kt-sticky-activate="{default: true, lg: true}" data-kt-sticky-name="app-header-minimize" data-kt-sticky-offset="{default: '200px', lg: '300px'}" data-kt-sticky-animation="false">
+                    <div class="app-container container-fluid d-flex align-items-stretch flex-stack" id="kt_app_header_container">
+                        <div class="d-flex align-items-center d-lg-none">
+                            <button id="kt_app_sidebar_mobile_toggle" class="btn btn-icon btn-color-gray-500 btn-active-color-primary ms-n4 me-1">
+                                <i class="ki-outline ki-burger-menu-6 fs-2x"></i>
+                            </button>
+                            <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
+                                <a href="/">
+                                    <img alt="Logo" src="assets/media/logos/demo50.svg" class="h-30px" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-stack justify-content-end flex-row-fluid" id="kt_app_navbar_wrapper">
+                            <div class="app-page-entry d-flex align-items-center flex-row-fluid gap-3">
+                                <div class="symbol symbol-40px">
+                                    <div class="symbol-label bg-light-primary">
+                                        <i class="ki-outline ki-calendar fs-2 text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <h1 class="text-gray-900 fs-2 fw-bold mb-0">Sistem Penjadwalan</h1>
+                                    <span class="text-gray-500 fw-semibold">Admin & Public</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+                @if (empty($hideSidebar))
+                    <div id="kt_app_sidebar" class="app-sidebar" data-kt-drawer="true" data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
+                        <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+                            <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper">
+                                <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" data-kt-menu="true">
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('public.schedule') }}">
+                                            <span class="menu-icon"><i class="ki-outline ki-user fs-2"></i></span>
+                                            <span class="menu-title">Public Schedule</span>
+                                        </a>
+                                    </div>
+                                    @if (!empty($isAdmin))
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="{{ route('admin.schedule') }}">
+                                                <span class="menu-icon"><i class="ki-outline ki-setting-2 fs-2"></i></span>
+                                                <span class="menu-title">Admin Dashboard</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="{{ route('admin.employees.index') }}">
+                                                <span class="menu-icon"><i class="ki-outline ki-people fs-2"></i></span>
+                                                <span class="menu-title">Employees</span>
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                    <div class="d-flex flex-column flex-column-fluid">
+                        @if (empty($hideToolbar))
+                            <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-5">
+                                <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack flex-wrap">
+                                    <div class="page-title d-flex flex-column justify-content-center me-3">
+                                        <h1 class="page-heading text-gray-900 fw-bold fs-3 my-0">@yield('page-title', 'Dashboard')</h1>
+                                        <span class="text-gray-500 fw-semibold fs-7">@yield('page-subtitle', 'Jadwal dan monitoring')</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        <div id="kt_app_content" class="app-content flex-column-fluid">
+                            <div id="kt_app_content_container" class="app-container container-fluid">
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="kt_app_footer" class="app-footer">
+                        <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
+                            <div class="text-gray-900 order-2 order-md-1">
+                                <span class="text-muted fw-semibold me-1">2026&copy;</span>
+                                <span class="text-gray-800">Jadwal Shift</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/plugins/global/plugins.bundle.js"></script>
+    <script src="assets/js/scripts.bundle.js"></script>
+</body>
+</html>

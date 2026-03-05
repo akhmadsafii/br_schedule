@@ -54,7 +54,7 @@
                         @csrf
                         <button type="submit" class="btn btn-light">Logout</button>
                     </form>
-                    <button class="btn btn-light-primary">Export Excel</button>
+                    <a href="{{ route('admin.export') }}" class="btn btn-light-primary">Export Excel</a>
                     <button class="btn btn-primary">Finalize Bulan</button>
                 </div>
             </div>

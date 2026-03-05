@@ -12,17 +12,17 @@ License: For each use you must have a valid license purchased only from above li
 -->
 <html lang="en">
 <head>
-    <base href="./" />
+    <base href="/" />
     <title>@yield('title', 'Sistem Penjadwalan')</title>
     <meta charset="utf-8" />
     <meta name="description" content="Scheduling system" />
     <meta name="keywords" content="schedule, shift, admin, public" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     @stack('styles')
 </head>
 <body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-sidebar-stacked="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -57,7 +57,7 @@ License: For each use you must have a valid license purchased only from above li
                             </button>
                             <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
                                 <a href="/">
-                                    <img alt="Logo" src="assets/media/logos/demo50.svg" class="h-30px" />
+                                    <img alt="Logo" src="{{ asset('assets/media/logos/demo50.svg') }}" class="h-30px" />
                                 </a>
                             </div>
                         </div>
@@ -143,7 +143,7 @@ License: For each use you must have a valid license purchased only from above li
         </div>
     </div>
 
-    <script src="assets/plugins/global/plugins.bundle.js"></script>
-    <script src="assets/js/scripts.bundle.js"></script>
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 </body>
 </html>

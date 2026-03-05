@@ -40,6 +40,44 @@ class ScheduleController extends Controller
         return view('admin.schedule', $context);
     }
 
+    public function export(Request $request)
+    {
+        $context = $this->buildScheduleContext();
+
+        $monthLabel = $context['monthLabel'];
+        $days = $context['days'];
+        $employees = $context['employees'];
+        $scheduleMap = $context['scheduleMap'];
+        $month = $context['month'];
+
+        $filename = 'jadwal-' . str_replace('-', '', $monthLabel) . '.csv';
+
+        return response()->streamDownload(function () use ($days, $employees, $scheduleMap, $month) {
+            $handle = fopen('php://output', 'w');
+
+            $header = array_merge(['Nama'], $days);
+            fputcsv($handle, $header);
+
+            foreach ($employees as $employee) {
+                $row = [$employee->name];
+                foreach ($days as $day) {
+                    $date = $month
+                        ? Carbon::create($month->year, $month->month, $day)->toDateString()
+                        : null;
+                    $shift = $date && isset($scheduleMap[$employee->id][$date])
+                        ? $scheduleMap[$employee->id][$date]
+                        : null;
+                    $row[] = $shift ? $shift->code : '';
+                }
+                fputcsv($handle, $row);
+            }
+
+            fclose($handle);
+        }, $filename, [
+            'Content-Type' => 'text/csv',
+        ]);
+    }
+
     private function buildScheduleContext(?Employee $employee = null): array
     {
         $month = Month::orderByDesc('year')

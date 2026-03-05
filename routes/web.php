@@ -24,5 +24,6 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 	Route::get('/', [ScheduleController::class, 'adminIndex'])->name('schedule');
+	Route::get('/export', [ScheduleController::class, 'export'])->name('export');
 	Route::resource('employees', EmployeeController::class)->except(['show']);
 });

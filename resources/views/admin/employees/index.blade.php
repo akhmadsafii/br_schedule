@@ -1,6 +1,4 @@
-@extends('index_dup')
-
-@php($isAdmin = true)
+@extends('layouts.admin')
 
 @section('title', 'Employees')
 @section('page-title', 'Employees')

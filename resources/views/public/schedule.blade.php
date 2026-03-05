@@ -1,6 +1,4 @@
-@extends('index_dup')
-
-@php($isAdmin = false)
+@extends('layouts.public')
 
 @section('title', 'Jadwal Karyawan')
 @section('page-title', 'Jadwal Karyawan')

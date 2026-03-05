@@ -1,6 +1,4 @@
-@extends('index_dup')
-
-@php($isAdmin = true)
+@extends('layouts.admin')
 
 @section('title', 'Form Karyawan')
 @section('page-title', $employee->exists ? 'Edit Karyawan' : 'Tambah Karyawan')

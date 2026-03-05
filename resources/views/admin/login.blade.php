@@ -1,4 +1,4 @@
-@extends('index_dup')
+@extends('layouts.admin')
 
 @section('title', 'Admin Login')
 @section('page-title', 'Login Admin')

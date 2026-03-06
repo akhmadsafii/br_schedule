@@ -38,8 +38,8 @@
             </div>
         @endif
 
-        @include('partials.metronic.schedule-table', [
+        {{-- @include('partials.metronic.schedule-table', [
             'editable' => $editable,
-        ])
+        ]) --}}
     </div>
 @endsection

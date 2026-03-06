@@ -13,6 +13,7 @@ class Employee extends Model
         'name',
         'nip',
         'department',
+        'photo',
         'token',
         'is_active',
     ];

@@ -279,30 +279,6 @@
 					@endif
 					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
 						<div class="d-flex flex-column flex-column-fluid">
-							<div id="kt_app_toolbar" class="app-toolbar mb-5 mb-lg-0">
-								<div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack flex-wrap">
-									<ul class="nav nav-stretch nav-line-tabs flex-grow-1 fs-5 fw-semibold mb-10">
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5 active" href="index.html">Overview</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/overview.html">Projects</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/campaigns.html">Campaigns</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/documents.html">Documents</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/followers.html">Followers</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/activity.html">Activity</a>
-										</li>
-									</ul>
-								</div>
-							</div>
 							<div id="kt_app_content" class="app-content flex-column-fluid">
 								<div id="kt_app_content_container" class="app-container container-fluid">
 									@yield('content')
@@ -364,6 +340,30 @@
 				window.addEventListener("load", applySidebarWidth);
 				window.addEventListener("resize", applySidebarWidth);
 				applySidebarWidth();
+			})();
+		</script>
+		<script>
+			(function () {
+				var input = document.getElementById("kt_sidebar_employee_search");
+				var list = document.getElementById("kt_sidebar_employee_list");
+				if (!input || !list) {
+					return;
+				}
+
+				var items = list.querySelectorAll("a[data-employee-name]");
+
+				function filterEmployees() {
+					var term = input.value.trim().toLowerCase();
+					items.forEach(function (item) {
+						var name = item.getAttribute("data-employee-name") || "";
+						var nip = item.getAttribute("data-employee-nip") || "";
+						var match = !term || name.indexOf(term) > -1 || nip.indexOf(term) > -1;
+						item.style.display = match ? "" : "none";
+					});
+				}
+
+				input.addEventListener("input", filterEmployees);
+				filterEmployees();
 			})();
 		</script>
 		<!--end::Custom Javascript-->

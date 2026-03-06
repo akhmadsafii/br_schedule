@@ -23,6 +23,7 @@ class ScheduleController extends Controller
         $context['token'] = $token;
         $context['publicEmployee'] = $publicEmployee;
         $context['editable'] = !$context['isFinal'];
+        $context['sidebarEmployees'] = Employee::orderBy('name')->get();
 
         if (!$publicEmployee) {
             $context['employees'] = collect();

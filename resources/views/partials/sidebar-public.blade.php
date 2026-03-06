@@ -38,7 +38,9 @@
 						<div class="text-gray-600 fs-8">NIP: {{ $employee->nip }}</div>
 					</div>
 					@if ($isActive)
-						<span class="ms-auto badge badge-light-primary">Dipilih</span>
+						<span class="ms-auto text-primary" aria-label="Dipilih">
+							<i class="ki-outline ki-check-circle fs-2"></i>
+						</span>
 					@endif
 				</a>
 			@empty

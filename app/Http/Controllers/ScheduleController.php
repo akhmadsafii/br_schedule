@@ -29,10 +29,6 @@ class ScheduleController extends Controller
             $selectedPeriod = Month::where('year', $selectedYear)
                 ->where('month', $selectedMonth)
                 ->first();
-            if (!$selectedPeriod) {
-                $selectedYear = null;
-                $selectedMonth = null;
-            }
         }
 
         $context = $this->buildScheduleContext($publicEmployee, $selectedPeriod);

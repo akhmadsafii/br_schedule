@@ -59,7 +59,7 @@
                 <select name="year" class="form-select form-select-sm form-select-solid" onchange="this.form.submit()">
                     <option value="">Pilih Tahun</option>
                     @foreach ($years as $year)
-                        <option value="{{ $year }}" @selected($selectedYear == $year)>{{ $year }}</option>
+                        <option value="{{ $year }}" {{ (string) $selectedYear == (string) $year ? 'selected' : '' }}>{{ $year }}</option>
                     @endforeach
                 </select>
             </div>
@@ -68,7 +68,7 @@
                 <select name="month" class="form-select form-select-sm form-select-solid" onchange="this.form.submit()">
                     <option value="">Pilih Bulan</option>
                     @foreach ($monthsForYear as $monthValue)
-                        <option value="{{ $monthValue }}" @selected($selectedMonth == $monthValue)>{{ $monthValue }}</option>
+                        <option value="{{ $monthValue }}" {{ (string) $selectedMonth == (string) $monthValue ? 'selected' : '' }}>{{ $monthValue }}</option>
                     @endforeach
                 </select>
             </div>

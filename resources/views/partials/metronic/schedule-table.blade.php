@@ -36,14 +36,20 @@
                                         : null;
                                 @endphp
                                 <td class="text-center">
-                                    <select class="form-select form-select-sm form-select-solid" {{ $editable ? '' : 'disabled' }}>
-                                        <option value="">-</option>
-                                        @foreach ($shifts as $shiftOption)
-                                            <option value="{{ $shiftOption->id }}" @selected($shift && $shift->id === $shiftOption->id)>
-                                                {{ $shiftOption->code }} - {{ $shiftOption->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    @if ($editable)
+                                        <select class="form-select form-select-sm form-select-solid" style="min-width: 110px">
+                                            <option value="">-</option>
+                                            @foreach ($shifts as $shiftOption)
+                                                <option value="{{ $shiftOption->id }}" {{ $shift && (string) $shift->id === (string) $shiftOption->id ? 'selected' : '' }}>
+                                                    {{ $shiftOption->code }} - {{ $shiftOption->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @else
+                                        <span class="badge badge-light-secondary">
+                                            {{ $shift ? $shift->code : '-' }}
+                                        </span>
+                                    @endif
                                 </td>
                             @empty
                                 <td class="text-center">-</td>

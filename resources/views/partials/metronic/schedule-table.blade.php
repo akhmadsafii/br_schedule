@@ -34,19 +34,31 @@
                                     $shift = $date && isset($scheduleMap[$employee->id][$date])
                                         ? $scheduleMap[$employee->id][$date]
                                         : null;
+                                    $shiftCode = $shift ? strtoupper($shift->code) : null;
+                                    $badgeClassMap = [
+                                        'L' => 'badge-light-secondary',
+                                        'CT' => 'badge-light-warning',
+                                        'MD' => 'badge-light-info',
+                                        'M' => 'badge-light-dark',
+                                        'P' => 'badge-light-success',
+                                        'S' => 'badge-light-primary',
+                                    ];
+                                    $badgeClass = $shiftCode && isset($badgeClassMap[$shiftCode])
+                                        ? $badgeClassMap[$shiftCode]
+                                        : 'badge-light-secondary';
                                 @endphp
                                 <td class="text-center">
                                     @if ($editable)
-                                        <select class="form-select form-select-sm form-select-solid" style="min-width: 110px">
+                                        <select class="form-select form-select-sm form-select-solid" style="min-width: 70px">
                                             <option value="">-</option>
                                             @foreach ($shifts as $shiftOption)
                                                 <option value="{{ $shiftOption->id }}" {{ $shift && (string) $shift->id === (string) $shiftOption->id ? 'selected' : '' }}>
-                                                    {{ $shiftOption->code }} - {{ $shiftOption->name }}
+                                                    {{ $shiftOption->code }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     @else
-                                        <span class="badge badge-light-secondary">
+                                        <span class="badge {{ $badgeClass }}">
                                             {{ $shift ? $shift->code : '-' }}
                                         </span>
                                     @endif

@@ -19,16 +19,33 @@ class ScheduleController extends Controller
             ? Employee::where('token', $token)->first()
             : null;
 
-        $context = $this->buildScheduleContext($publicEmployee);
+        $requestedYear = $request->query('year');
+        $requestedMonth = $request->query('month');
+        $selectedYear = $requestedYear ? (int) $requestedYear : null;
+        $selectedMonth = $requestedMonth ? (int) $requestedMonth : null;
+        $selectedPeriod = null;
+
+        if ($selectedYear && $selectedMonth) {
+            $selectedPeriod = Month::where('year', $selectedYear)
+                ->where('month', $selectedMonth)
+                ->first();
+            if (!$selectedPeriod) {
+                $selectedYear = null;
+                $selectedMonth = null;
+            }
+        }
+
+        $context = $this->buildScheduleContext($publicEmployee, $selectedPeriod);
         $context['token'] = $token;
         $context['publicEmployee'] = $publicEmployee;
-        $context['editable'] = !$context['isFinal'];
+        $context['editable'] = $publicEmployee ? !$context['isFinal'] : false;
         $context['sidebarEmployees'] = Employee::orderBy('name')->get();
-
-        if (!$publicEmployee) {
-            $context['employees'] = collect();
-            $context['scheduleMap'] = [];
-        }
+        $context['tokenInvalid'] = (bool) ($token && !$publicEmployee);
+        $context['availableMonths'] = Month::orderByDesc('year')
+            ->orderByDesc('month')
+            ->get();
+        $context['selectedYear'] = $selectedYear ?: ($context['month']->year ?? null);
+        $context['selectedMonth'] = $selectedMonth ?: ($context['month']->month ?? null);
 
         return view('public.schedule', $context);
     }
@@ -79,9 +96,9 @@ class ScheduleController extends Controller
         ]);
     }
 
-    private function buildScheduleContext(?Employee $employee = null): array
+    private function buildScheduleContext(?Employee $employee = null, ?Month $month = null): array
     {
-        $month = Month::orderByDesc('year')
+        $month = $month ?: Month::orderByDesc('year')
             ->orderByDesc('month')
             ->first();
 
